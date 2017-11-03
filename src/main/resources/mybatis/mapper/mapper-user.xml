@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjxuser.mapper.UserMapper" >
+    <resultMap id="userResultMap" type="com.xjxuser.entity.UserEntity" >
+        <id column="user_id" property="userId"  />
+        <result column="nickname" property="nickname"  />
+        <result column="phone" property="phone"  />
+        <result column="password" property="password" />
+        <result column="email" property="email"  />
+        <result column="ctime" property="ctime"  />
+        <result column="mtime" property="mtime"  />
+        <result column="avator" property="avatar"  />
+        <result column="message" property="message"  />
+        <result column="gender" property="gender" />
+        <result column="birthday" property="birthday"  />
+    </resultMap>
+
+    <sql id="User_Update_list">
+        nickname, phone, password, email, avatar, message, gender, birthday
+    </sql>
+    <sql id="User_Column_List" >
+        user_id, nickname, phone, password, email, ctime, mtime, avatar, message, gender, birthday
+    </sql>
+
+
+    <select id="getAll" resultMap="userResultMap"  >
+        SELECT
+        <include refid="User_Column_List" />
+        FROM user
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="userResultMap" >
+        SELECT
+        <include refid="User_Column_List" />
+        FROM user
+        WHERE user_id = #{user_id}
+    </select>
+
+    <insert id="insert" parameterType="com.xjxuser.entity.UserEntity" >
+        INSERT INTO
+        user
+        (<include refid="User_Update_list"/>)
+        VALUES
+        (#{nickname}, #{phone}, #{password}, #{email}, #{avatar}, @{message}, @{gender}, @{birthday})
+    </insert>
+
+    <update id="update" parameterType="com.xjxuser.entity.UserEntity" >
+        UPDATE
+        user
+        SET
+        <if test="nickname != null">nickname = #{nickname},</if>
+        phone = #{phone},
+        <if test="password != null">password = #{password},</if>
+        email = #{email},
+        avatar = #{avatar},
+        message = #{message},
+        gender = #{gender},
+        birthday = #{birthday}
+        WHERE
+        user_id = #{user_id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long" >
+        DELETE FROM
+        user
+        WHERE
+        user_id =#{user_id}
+    </delete>
+</mapper>
