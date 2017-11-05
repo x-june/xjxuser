@@ -41,7 +41,7 @@
         user
         (<include refid="User_Update_list"/>)
         VALUES
-        (#{nickname}, #{phone}, #{password}, #{email}, #{avatar}, @{message}, @{gender}, @{birthday})
+        (#{nickname}, #{phone}, #{password}, #{email}, #{avatar}, #{message}, #{gender}, #{birthday})
     </insert>
 
     <update id="update" parameterType="com.xjxuser.entity.UserEntity" >

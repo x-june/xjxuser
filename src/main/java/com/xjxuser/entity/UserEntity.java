@@ -1,18 +1,22 @@
 package com.xjxuser.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
+import java.util.regex.Pattern;
 
 public class UserEntity {
     public Long userId;
     public String nickname;
-    public String phone;
+    public String phone ;
     public String password;
-    public String email;
+    public String email ;
     public Date ctime;
     public Date mtime;
-    public String avatar;
-    public String message;
-    public int gender;
+    public String avatar ;
+    public String message ;
+    public int gender = 0;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date birthday;
 
     public Long getUserId() {
