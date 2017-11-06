@@ -1,11 +1,12 @@
 package com.xjxuser.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.regex.Pattern;
 
-public class UserEntity {
+public class UserEntity extends BaseEntity {
     public Long userId;
     public String nickname;
     public String phone ;
@@ -17,6 +18,7 @@ public class UserEntity {
     public String message ;
     public int gender = 0;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     public Date birthday;
 
     public Long getUserId() {

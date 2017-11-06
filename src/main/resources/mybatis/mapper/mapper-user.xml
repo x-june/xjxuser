@@ -36,7 +36,7 @@
         WHERE user_id = #{user_id}
     </select>
 
-    <insert id="insert" parameterType="com.xjxuser.entity.UserEntity" >
+    <insert id="insert" parameterType="com.xjxuser.entity.UserEntity" useGeneratedKeys="true" keyProperty="userId">
         INSERT INTO
         user
         (<include refid="User_Update_list"/>)
@@ -49,15 +49,15 @@
         user
         SET
         <if test="nickname != null">nickname = #{nickname},</if>
-        phone = #{phone},
+        <if test="phone != null">phone = #{phone},</if>
         <if test="password != null">password = #{password},</if>
-        email = #{email},
-        avatar = #{avatar},
-        message = #{message},
-        gender = #{gender},
-        birthday = #{birthday}
+        <if test="email != null">email = #{email},</if>
+        <if test="avatar != null">avatar = #{avatar},</if>
+        <if test="message != null">message = #{message},</if>
+        <if test="gender != null">gender = #{gender},</if>
+        <if test="birthday != null">birthday = #{birthday}</if>
         WHERE
-        user_id = #{user_id}
+        user_id = #{userId}
     </update>
 
     <delete id="delete" parameterType="java.lang.Long" >
