@@ -58,4 +58,10 @@ public class UserController extends BaseController {
         int result = userMapper.delete(userId);
         return responseWith(result);
     }
+
+    @RequestMapping("/zeroException")
+    public int zeroException() {
+        return 100/0;
+    }
+
 }
